@@ -22,9 +22,9 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sampleee/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst s3 = new AWS.S3();\n\nexports.handler = async (event) => {\n\n    s3.listObjects({\n        'Bucket': 'indunil.trigger',\n        'MaxKeys': 10,\n        'Prefix': ''\n    }).promise()\n        .then(data => {\n            console.log(data);           // successful response\n                        console.log(data);\n\n            /*\n            data = {\n                Contents: [\n                    {\n                       ETag: \"\\\"70ee1738b6b21e2c8a43f3a5ab0eee71\\\"\",\n                       Key: \"example1.jpg\",\n                       LastModified: \"<Date Representation>\",\n                       Owner: {\n                          DisplayName: \"myname\",\n                          ID: \"12345example25102679df27bb0ae12b3f85be6f290b936c4393484be31bebcc\"\n                       },\n                       Size: 11,\n                       StorageClass: \"STANDARD\"\n                    },\n                    // {...}\n                ]\n            }\n            */\n        })\n        .catch(err => {\n            console.log(err, err.stack); // an error occurred\n            console.log(err);\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
+        "code": "let AWS = require('aws-sdk');\nconst ddb = new AWS.DynamoDB.DocumentClient();\n\nexports.handler = async (event) => {\n    ddb.get({\n        TableName: \"IndunilDDB\",\n        Key: {\n            test: \"10\",\n            demo: \"100\"\n        }\n    }).promise()\n        .then(data => {\n            // your code goes here\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
         "config": {
-          "runtime": "nodejs10.x",
+          "runtime": "nodejs12.x",
           "handler": "handler",
           "timeout": 60,
           "memory": 128,
@@ -48,15 +48,38 @@
     ],
     "currentFileId": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
     "resources": {
-      "s3induniltrigger": {
-        "name": "s3induniltrigger",
-        "type": "S3",
+      "ddbIndunilDDB": {
+        "name": "ddbIndunilDDB",
+        "type": "DynamoDB",
         "config": {
-          "mode": 1,
-          "bucket": {
-            "region": "us-east-1",
-            "name": "indunil.trigger"
-          }
+          "mode": 0,
+          "operation": "get",
+          "table": {
+            "arn": "",
+            "name": "IndunilDDB",
+            "partitionKey": "test",
+            "partitionKeyType": "S",
+            "hasSortKey": true,
+            "sortKey": "demo",
+            "sortKeyType": "S",
+            "payPerRequest": true,
+            "mode": 0
+          },
+          "isGlobalEditMode": false,
+          "parameters": {
+            "Key": {
+              "test": "10",
+              "demo": "100"
+            },
+            "Item": {},
+            "ExpressionAttributeValues": {}
+          },
+          "triggerParams": {},
+          "validator": {
+            "validatableFields": {},
+            "validity": true
+          },
+          "valid": true
         }
       }
     },
@@ -93,7 +116,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576567717099
+    "lastSave": 1576568120703
   },
   "VCS_STATE": {
     "provider": "GitHub",
