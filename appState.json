@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sampleee/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nlet SL_AWS = require('slappforge-sdk-aws');\nconst sqs = new SL_AWS.SQS(AWS);\n\nexports.handler = async (event) => {\n    sqs.receiveMessage({\n        QueueUrl: `https://sqs.${process.env.AWS_REGION}.amazonaws.com/${process.env.SIGMA_AWS_ACC_ID}/KTestSQS`,\n        AttributeNames: ['All'],\n        MaxNumberOfMessages: '1',\n        VisibilityTimeout: '30',\n        WaitTimeSeconds: '0'\n    }).promise()\n        .then(receivedMsgData => {\n            if (!!(receivedMsgData) && !!(receivedMsgData.Messages)) {\n                let receivedMessages = receivedMsgData.Messages;\n                receivedMessages.forEach(message => {\n                    // your logic to access each message through out the loop. Each message is available under variable message \n                    // within this block\n                });\n            } else {\n                // No messages to process\n            }\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
+        "code": "let AWS = require('aws-sdk');\nconst sns = new AWS.SNS();\n\nexports.handler = async (event) => {\n    sns.publish({\n        Message: \"hi, test sns\",\n        Subject: \"test sns\",\n        TopicArn: \"arn:aws:sns:us-east-1:318300609668:TestSNS\",\n        MessageStructure: \"String\",\n        MessageAttributes: {}\n    }).promise()\n        .then(data => {\n            // your code goes here\n        })\n        .catch(err => {\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
         "config": {
           "runtime": "nodejs10.x",
           "handler": "handler",
@@ -48,25 +48,16 @@
     ],
     "currentFileId": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
     "resources": {
-      "sqsKTestSQS": {
-        "name": "sqsKTestSQS",
-        "type": "SQS",
+      "snsusEast1TestSNS": {
+        "name": "snsusEast1TestSNS",
+        "type": "SNS",
         "config": {
-          "mode": 1,
-          "existing": true,
-          "name": "KTestSQS",
-          "url": "https://sqs.us-east-1.amazonaws.com/318300609668/KTestSQS",
-          "selectedRegion": "us-east-1",
-          "deliveryDelay": "0",
-          "deliveryDelayUnit": "seconds",
-          "queueType": "standardQueue",
-          "defaultVisibilityTimeout": "30",
-          "defaultVisibilityTimeoutUnit": "seconds",
-          "messageRetentionPeriod": "345600",
-          "messageRetentionPeriodUnit": "seconds",
-          "maximumMessageSize": 256,
-          "receiveMessageWaitTime": "0",
-          "queueARN": "arn:aws:sqs:us-east-1:318300609668:KTestSQS"
+          "topicMode": 1,
+          "topicName": "TestSNS",
+          "topicArn": "arn:aws:sns:us-east-1:318300609668:TestSNS",
+          "topicRegion": "us-east-1",
+          "snsType": 0,
+          "subscriptions": []
         }
       }
     },
@@ -92,13 +83,6 @@
           "version": "2.176.0",
           "dev": true,
           "notRemovable": false
-        },
-        "slappforge-sdk-aws": {
-          "name": "slappforge-sdk-aws",
-          "language": "javascript",
-          "version": "0.0.5",
-          "dev": false,
-          "notRemovable": false
         }
       }
     }
@@ -110,7 +94,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576567066555
+    "lastSave": 1576567474369
   },
   "VCS_STATE": {
     "provider": "GitHub",
