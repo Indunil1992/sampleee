@@ -1,0 +1,76 @@
+{
+  "EDITOR_STATE": {
+    "allProjectFiles": {
+      "2321995f-f496-4d77-a1eb-7e267a9c8ec9": {
+        "id": "2321995f-f496-4d77-a1eb-7e267a9c8ec9",
+        "parent": null,
+        "name": "sampleee",
+        "type": "DIRECTORY",
+        "isDirectory": true,
+        "children": [
+          "ede5441a-b365-4dc4-81c9-77d6b326a8ad"
+        ],
+        "isRemovable": false,
+        "filePath": "sampleee"
+      },
+      "ede5441a-b365-4dc4-81c9-77d6b326a8ad": {
+        "id": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
+        "parent": "2321995f-f496-4d77-a1eb-7e267a9c8ec9",
+        "name": "lambda.js",
+        "type": "JS_LAMBDA",
+        "isDirectory": false,
+        "children": [],
+        "isRemovable": true,
+        "filePath": "sampleee/lambda.js",
+        "code": "exports.handler = async (event) => {\n    \n    return {\"message\": \"Successfully executed\"};\n};",
+        "config": {
+          "runtime": "nodejs12.x",
+          "handler": "handler",
+          "timeout": 60,
+          "memory": 128,
+          "layers": []
+        },
+        "triggers": []
+      }
+    },
+    "rootNode": "2321995f-f496-4d77-a1eb-7e267a9c8ec9",
+    "openFiles": [
+      "ede5441a-b365-4dc4-81c9-77d6b326a8ad"
+    ],
+    "currentFileId": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
+    "resources": {},
+    "customTemplate": {
+      "dialect": null,
+      "definitions": null
+    },
+    "envVariables": [
+      {
+        "lambdaId": "all",
+        "varKey": "SIGMA_AWS_ACC_ID",
+        "varValue": null,
+        "shouldPersist": false,
+        "displayOnly": false,
+        "editable": false
+      }
+    ],
+    "packageJSON": {
+      "dependencies": {}
+    }
+  },
+  "PROJECT_META": {
+    "projectName": "sampleee",
+    "projectDescription": "",
+    "projectVersion": "1.0.0",
+    "projectRegion": "us-east-1",
+    "platform": "AWS",
+    "platformRegions": {},
+    "lastSave": 1576566337220
+  },
+  "VCS_STATE": {
+    "provider": "GitHub",
+    "repo": {
+      "name": "sampleee",
+      "url": "https://github.com/Indunil1992/sampleee"
+    }
+  }
+}
