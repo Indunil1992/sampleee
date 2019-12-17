@@ -22,9 +22,9 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sampleee/lambda.js",
-        "code": "exports.handler = async (event) => {\n    \n    return {\"message\": \"Successfully executed\"};\n};",
+        "code": "let AWS = require('aws-sdk');\nconst translate = new AWS.Translate();\n\nexports.handler = async (event) => {\n    translate.translateText({\n        SourceLanguageCode: \"ar\",\n        TargetLanguageCode: \"en\",\n        Text: \"ummi\"\n    }).promise()\n        .then(data => {\n            // your code goes here\n            console.log(data);\n        })\n        .catch(err => {\n                        console.log(err);\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
         "config": {
-          "runtime": "nodejs12.x",
+          "runtime": "nodejs10.x",
           "handler": "handler",
           "timeout": 60,
           "memory": 128,
@@ -38,7 +38,13 @@
       "ede5441a-b365-4dc4-81c9-77d6b326a8ad"
     ],
     "currentFileId": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
-    "resources": {},
+    "resources": {
+      "translateResource": {
+        "name": "translateResource",
+        "type": "Translate",
+        "config": {}
+      }
+    },
     "customTemplate": {
       "dialect": null,
       "definitions": null
@@ -54,7 +60,15 @@
       }
     ],
     "packageJSON": {
-      "dependencies": {}
+      "dependencies": {
+        "aws-sdk": {
+          "name": "aws-sdk",
+          "language": "javascript",
+          "version": "2.176.0",
+          "dev": true,
+          "notRemovable": false
+        }
+      }
     }
   },
   "PROJECT_META": {
@@ -64,7 +78,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576566337220
+    "lastSave": 1576566566018
   },
   "VCS_STATE": {
     "provider": "GitHub",
