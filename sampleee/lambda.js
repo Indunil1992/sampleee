@@ -3,9 +3,9 @@ const translate = new AWS.Translate();
 
 exports.handler = async (event) => {
     translate.translateText({
-        SourceLanguageCode: "ar",
+        SourceLanguageCode: "de",
         TargetLanguageCode: "en",
-        Text: "um"
+        Text: "Mutter"
     }).promise()
         .then(data => {
             // your code goes here
