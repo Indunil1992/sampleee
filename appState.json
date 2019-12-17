@@ -22,7 +22,7 @@
         "children": [],
         "isRemovable": true,
         "filePath": "sampleee/lambda.js",
-        "code": "let AWS = require('aws-sdk');\nconst translate = new AWS.Translate();\n\nexports.handler = async (event) => {\n    translate.translateText({\n        SourceLanguageCode: \"ar\",\n        TargetLanguageCode: \"en\",\n        Text: \"ummi\"\n    }).promise()\n        .then(data => {\n            // your code goes here\n            console.log(data);\n        })\n        .catch(err => {\n                        console.log(err);\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
+        "code": "let AWS = require('aws-sdk');\nconst translate = new AWS.Translate();\n\nexports.handler = async (event) => {\n    translate.translateText({\n        SourceLanguageCode: \"ar\",\n        TargetLanguageCode: \"en\",\n        Text: \"um\"\n    }).promise()\n        .then(data => {\n            // your code goes here\n            console.log(data);\n        })\n        .catch(err => {\n            console.log(err);\n            // error handling goes here\n        });\n\n    return { \"message\": \"Successfully executed\" };\n};",
         "config": {
           "runtime": "nodejs10.x",
           "handler": "handler",
@@ -30,7 +30,16 @@
           "memory": 128,
           "layers": []
         },
-        "triggers": []
+        "triggers": [],
+        "testCases": {
+          "d7d94bb0-c3c2-43ce-aa00-b0b27e1c74b5": {
+            "id": "d7d94bb0-c3c2-43ce-aa00-b0b27e1c74b5",
+            "name": "Test event",
+            "functionId": "ede5441a-b365-4dc4-81c9-77d6b326a8ad",
+            "event": "{\r\n    \"key1\": \"value1\",\r\n    \"key2\": \"value2\",\r\n    \"key3\": \"value3\"\r\n}",
+            "eventTemplate": "hello-world"
+          }
+        }
       }
     },
     "rootNode": "2321995f-f496-4d77-a1eb-7e267a9c8ec9",
@@ -78,7 +87,7 @@
     "projectRegion": "us-east-1",
     "platform": "AWS",
     "platformRegions": {},
-    "lastSave": 1576566566018
+    "lastSave": 1576566700495
   },
   "VCS_STATE": {
     "provider": "GitHub",
